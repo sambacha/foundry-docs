@@ -1,7 +1,6 @@
 ---
 created: 2022-01-02T13:16:15 (UTC -08:00)
 tags: [rust,rustlang,rust-lang,evm]
-source: file:///Users/sbacha/foundry/rustdocs/evm/index.html
 author: 
 ---
 
@@ -11,9 +10,6 @@ author:
 > Ethereum Virtual Machine implementation in Rust
 
 ---
-Expand description
-
-Ethereum Virtual Machine implementation in Rust
 
 Allows to listen to runtime events.
 

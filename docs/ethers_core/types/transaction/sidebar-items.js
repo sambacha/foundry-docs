@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["eip1559",""],["eip2718",""],["eip2930",""],["eip712",""],["request","Transaction types"],["response","Transaction types"]]});

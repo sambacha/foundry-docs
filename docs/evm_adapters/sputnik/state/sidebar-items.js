@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["new_shared_state","Create a new shareable state."]],"struct":[["ForkedState","A state that branches off from the shared state and operates according to the following rules:"]],"type":[["SharedState","A state that can be shared across threads"]]});

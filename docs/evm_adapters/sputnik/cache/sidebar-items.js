@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["new_shared_cache","Create a new shareable state cache."]],"struct":[["SharedBackend","A cloneable backend type that shares access to the backend data with all its clones."]],"type":[["MemCache","A basic in memory cache (address -> Account)"],["SharedCache","A state cache that can be shared across threads"]]});

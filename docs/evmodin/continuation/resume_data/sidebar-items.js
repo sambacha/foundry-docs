@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AccessAccountStatus",""],["AccessStorageStatus",""],["AccountExistsStatus",""],["Balance",""],["BlockHash",""],["CallOutput",""],["Code",""],["CodeHash",""],["CodeSize",""],["StorageStatusInfo",""],["StorageValue",""],["TxContextData",""]],"type":[["StateModifier",""]]});

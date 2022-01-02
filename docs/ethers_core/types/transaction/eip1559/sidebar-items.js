@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Eip1559TransactionRequest","Parameters for sending a transaction"]]});

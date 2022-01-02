@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["RemappingError",""]],"struct":[["Remapping","The solidity compiler can only reference files that exist locally on your computer. So importing directly from GitHub (as an example) is not possible."]]});

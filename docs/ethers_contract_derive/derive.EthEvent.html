@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Derives the `EthEvent` and `Tokenizeable` trait for the labeled type."><meta name="keywords" content="rust, rustlang, rust-lang, EthEvent"><title>EthEvent in ethers_contract_derive - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings" ></script><script src="../storage.js"></script><script src="../crates.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc derive"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../ethers_contract_derive/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><div class="sidebar-elems"><h2 class="location">Other items in<br><a href="index.html">ethers_contract_derive</a></h2><div id="sidebar-vars" data-name="EthEvent" data-ty="derive" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../wheel.svg"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Derive Macro <a href="index.html">ethers_contract_derive</a>::<wbr><a class="derive" href="#">EthEvent</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/ethers_contract_derive/lib.rs.html#215-218" title="goto source code">[src]</a></span></h1><pre class="rust derive"><code>#[derive(EthEvent)]
+{
+    // Attributes available to this derive:
+    #[ethevent]
+}
+</code></pre><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Derives the <code>EthEvent</code> and <code>Tokenizeable</code> trait for the labeled type.</p>
+<p>Additional arguments can be specified using the <code>#[ethevent(...)]</code>
+attribute:</p>
+<p>For the struct:</p>
+<ul>
+<li><code>name</code>, <code>name = &quot;...&quot;</code>: Overrides the generated <code>EthEvent</code> name, default is the
+struct’s name.</li>
+<li><code>signature</code>, <code>signature = &quot;...&quot;</code>: The signature as hex string to override the
+event’s signature.</li>
+<li><code>abi</code>, <code>abi = &quot;...&quot;</code>: The ABI signature for the event this event’s data corresponds to.
+The <code>abi</code> should be solidity event definition or a tuple of the event’s
+types in case the  event has non elementary (other <code>EthAbiType</code>) types as
+members</li>
+<li><code>anonymous</code>: A flag to mark this as an anonymous event</li>
+</ul>
+<p>For fields:</p>
+<ul>
+<li><code>indexed</code>: flag to mark a field as an indexed event input</li>
+<li><code>name</code>: override the name of an indexed event input, default is the rust field name</li>
+</ul>
+<h2 id="example" class="section-header"><a href="#example">Example</a></h2>
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="kw">use</span> <span class="ident">ethers_contract::EthCall</span>;
+<span class="kw">use</span> <span class="ident">ethers_core::types::Address</span>;
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">EthAbiType</span>)]</span>
+<span class="kw">struct</span> <span class="ident">Inner</span> {
+    <span class="ident">inner</span>: <span class="ident">Address</span>,
+    <span class="ident">msg</span>: <span class="ident">String</span>,
+}
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">EthEvent</span>)]</span>
+<span class="attribute">#[<span class="ident">ethevent</span>(<span class="ident">abi</span> <span class="op">=</span> <span class="string">&quot;ValueChangedEvent((address,string),string)&quot;</span>)]</span>
+<span class="kw">struct</span> <span class="ident">ValueChangedEvent</span> {
+    <span class="attribute">#[<span class="ident">ethevent</span>(<span class="ident">indexed</span>, <span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;_target&quot;</span>)]</span>
+    <span class="ident">target</span>: <span class="ident">Address</span>,
+    <span class="ident">msg</span>: <span class="ident">String</span>,
+    <span class="ident">inner</span>: <span class="ident">Inner</span>,
+}</code></pre></div>
+</div></details></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="ethers_contract_derive" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+    <script src="../main.js"></script>
+</body></html>

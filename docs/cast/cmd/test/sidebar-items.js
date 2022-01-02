@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["test","Runs all the tests"]],"struct":[["Test","The result of a single test"],["TestArgs",""],["TestOutcome","Represents the bundled results of all tests"]]});

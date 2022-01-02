@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["install",""],["main",""],["remove",""]],"mod":[["cmd","Subcommands for forge"],["opts",""],["utils",""]]});

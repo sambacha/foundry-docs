@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ExpectedEmit",""],["MemoryStackStateOwned","This struct implementation is copied from upstream and modified to own the Backend type."],["RecordAccess",""]]});

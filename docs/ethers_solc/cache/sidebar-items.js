@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["SOLIDITY_FILES_CACHE_FILENAME","The file name of the default cache file"]],"struct":[["CacheEntry",""],["PathMap","A helper type to handle source name/full disk mappings"],["SolFilesCache","A hardhat compatible cache representation"],["SolFilesCacheBuilder",""]]});

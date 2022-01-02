@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["evm","Creates a new Sputnik EVM given the [`EvmOpts`] (specifying whether to fork or not), a VM Hard Fork config, and the initial state from the memory vicinity."]]});

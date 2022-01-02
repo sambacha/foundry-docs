@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Ethers uses a middleware-based architecture. You start the middleware stack with a `Provider`, and wrap it with additional middleware functionalities that you need."><meta name="keywords" content="rust, rustlang, rust-lang, ethers_middleware"><title>ethers_middleware - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings" ></script><script src="../storage.js"></script><script src="../crates.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../ethers_middleware/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><h2 class="location">Crate ethers_middleware</h2><div class="block version"><div class="narrow-helper"></div><p>Version 0.6.0</p></div><div class="sidebar-elems"><a id="all-types" href="all.html"><p>See all ethers_middleware's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li></ul></div><div id="sidebar-vars" data-name="ethers_middleware" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../wheel.svg"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">ethers_middleware</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/ethers_middleware/lib.rs.html#1-35" title="goto source code">[src]</a></span></h1><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Ethers uses a middleware-based architecture. You start the middleware stack with
+a <a href="../ethers_providers/provider/struct.Provider.html"><code>Provider</code></a>, and wrap it with additional
+middleware functionalities that you need.</p>
+<h3 id="available-middleware" class="section-header"><a href="#available-middleware">Available Middleware</a></h3>
+<ul>
+<li><a href="./signer/struct.SignerMiddleware.html"><code>Signer</code></a>: Signs transactions locally,
+with a private key or a hardware wallet</li>
+<li><a href="./nonce_manager/struct.NonceManagerMiddleware.html"><code>Nonce Manager</code></a>: Manages
+nonces locally, allowing the rapid broadcast of transactions without having to
+wait for them to be submitted</li>
+<li><a href="./gas_escalator/struct.GasEscalatorMiddleware.html"><code>Gas Escalator</code></a>: Bumps
+transaction gas prices in the background</li>
+<li><a href="./gas_oracle/struct.GasOracleMiddleware.html"><code>Gas Oracle</code></a>: Allows getting
+your gas price estimates from places other than <code>eth_gasPrice</code>.</li>
+<li><a href="./transformer/trait.Transformer.html"><code>Transformer</code></a>: Allows intercepting and
+transforming a transaction to be broadcasted via a proxy wallet, e.g.
+<a href="./transformer/struct.DsProxy.html"><code>DSProxy</code></a>.</li>
+</ul>
+<h3 id="example-of-a-middleware-stack" class="section-header"><a href="#example-of-a-middleware-stack">Example of a middleware stack</a></h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">ethers_providers</span>::{<span class="ident">Provider</span>, <span class="ident">Http</span>};
+<span class="kw">use</span> <span class="ident">ethers_signers</span>::{<span class="ident">LocalWallet</span>, <span class="ident">Signer</span>};
+<span class="kw">use</span> <span class="ident">ethers_middleware</span>::{
+    <span class="ident">gas_escalator</span>::{<span class="ident">GasEscalatorMiddleware</span>, <span class="ident">GeometricGasPrice</span>, <span class="ident">Frequency</span>},
+    <span class="ident">gas_oracle</span>::{<span class="ident">GasOracleMiddleware</span>, <span class="ident">EthGasStation</span>, <span class="ident">GasCategory</span>},
+    <span class="ident">signer::SignerMiddleware</span>,
+    <span class="ident">nonce_manager::NonceManagerMiddleware</span>,
+};
+<span class="kw">use</span> <span class="ident">ethers_core::rand</span>;
+<span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
+
+<span class="comment">// Start the stack</span>
+<span class="kw">let</span> <span class="ident">provider</span> <span class="op">=</span> <span class="ident">Provider</span>::<span class="op">&lt;</span><span class="ident">Http</span><span class="op">&gt;</span><span class="ident">::try_from</span>(<span class="string">&quot;http://localhost:8545&quot;</span>).<span class="ident">unwrap</span>();
+
+<span class="comment">// Escalate gas prices</span>
+<span class="kw">let</span> <span class="ident">escalator</span> <span class="op">=</span> <span class="ident">GeometricGasPrice::new</span>(<span class="number">1.125</span>, <span class="number">60u64</span>, <span class="prelude-val">None</span>::<span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>);
+<span class="kw">let</span> <span class="ident">provider</span> <span class="op">=</span>
+    <span class="ident">GasEscalatorMiddleware::new</span>(<span class="ident">provider</span>, <span class="ident">escalator</span>, <span class="ident">Frequency::PerBlock</span>);
+
+<span class="comment">// Sign transactions with a private key</span>
+<span class="kw">let</span> <span class="ident">signer</span> <span class="op">=</span> <span class="ident">LocalWallet::new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rand::thread_rng</span>());
+<span class="kw">let</span> <span class="ident">address</span> <span class="op">=</span> <span class="ident">signer</span>.<span class="ident">address</span>();
+<span class="kw">let</span> <span class="ident">provider</span> <span class="op">=</span> <span class="ident">SignerMiddleware::new</span>(<span class="ident">provider</span>, <span class="ident">signer</span>);
+
+<span class="comment">// Use EthGasStation as the gas oracle</span>
+<span class="kw">let</span> <span class="ident">gas_oracle</span> <span class="op">=</span> <span class="ident">EthGasStation::new</span>(<span class="prelude-val">None</span>);
+<span class="kw">let</span> <span class="ident">provider</span> <span class="op">=</span> <span class="ident">GasOracleMiddleware::new</span>(<span class="ident">provider</span>, <span class="ident">gas_oracle</span>);
+
+<span class="comment">// Manage nonces locally</span>
+<span class="kw">let</span> <span class="ident">provider</span> <span class="op">=</span> <span class="ident">NonceManagerMiddleware::new</span>(<span class="ident">provider</span>, <span class="ident">address</span>);
+
+<span class="comment">// ... do something with the provider</span></code></pre></div>
+</div></details><h2 id="reexports" class="section-header"><a href="#reexports">Re-exports</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left import-item"><code>pub use nonce_manager::<a class="struct" href="nonce_manager/struct.NonceManagerMiddleware.html" title="struct ethers_middleware::nonce_manager::NonceManagerMiddleware">NonceManagerMiddleware</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use signer::<a class="struct" href="signer/struct.SignerMiddleware.html" title="struct ethers_middleware::signer::SignerMiddleware">SignerMiddleware</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use policy::<a class="struct" href="policy/struct.PolicyMiddleware.html" title="struct ethers_middleware::policy::PolicyMiddleware">PolicyMiddleware</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use timelag::<a class="struct" href="timelag/struct.TimeLag.html" title="struct ethers_middleware::timelag::TimeLag">TimeLag</a>;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="gas_escalator/index.html" title="ethers_middleware::gas_escalator mod">gas_escalator</a></div><div class="item-right docblock-short"><p>The <a href="gas_escalator/struct.GasEscalatorMiddleware.html">Gas Escalator middleware</a>
+is used to re-broadcast transactions with an increasing gas price to guarantee
+their timely inclusion.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="gas_oracle/index.html" title="ethers_middleware::gas_oracle mod">gas_oracle</a></div><div class="item-right docblock-short"><p>The gas oracle middleware is used to get the gas price from a list of gas oracles
+instead of using eth_gasPrice. For usage examples, refer to the
+<a href="gas_oracle/trait.GasOracle.html"><code>GasOracle</code></a> trait.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="nonce_manager/index.html" title="ethers_middleware::nonce_manager mod">nonce_manager</a></div><div class="item-right docblock-short"><p>The <a href="nonce_manager/struct.NonceManagerMiddleware.html">Nonce Manager</a> is used to locally calculate nonces instead
+of using eth_getTransactionCount</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="policy/index.html" title="ethers_middleware::policy mod">policy</a></div><div class="item-right docblock-short"><p>The <a href="policy/struct.PolicyMiddleware.html">Policy</a> is used to ensure transactions comply with the rules
+configured in the <code>PolicyMiddleware</code> before sending them.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="signer/index.html" title="ethers_middleware::signer mod">signer</a></div><div class="item-right docblock-short"><p>The <a href="signer/struct.SignerMiddleware.html">Signer</a> is used to locally sign transactions and messages
+instead of using eth_sendTransaction and eth_sign</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="timelag/index.html" title="ethers_middleware::timelag mod">timelag</a></div><div class="item-right docblock-short"><p>The <a href="timelag/struct.TimeLag.html">TimeLag</a> provides safety against reorgs by querying state N blocks
+before the chain tip</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="transformer/index.html" title="ethers_middleware::transformer mod">transformer</a></div><div class="item-right docblock-short"><p>The <a href="crate::TransformerMiddleware">Transformer</a> is used to intercept transactions and transform
+them to be sent via various supported transformers, e.g., <a href="transformer/struct.DsProxy.html">DSProxy</a></p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="ethers_middleware" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+    <script src="../main.js"></script>
+</body></html>

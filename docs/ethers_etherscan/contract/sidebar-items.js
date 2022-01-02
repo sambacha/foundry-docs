@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["CodeFormat",""]],"struct":[["ContractMetadata",""],["Metadata","Etherscan contract metadata"],["VerifyContract","Arguments for verifying contracts"]]});

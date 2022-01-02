@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["SignerMiddlewareError","Error thrown when the client interacts with the blockchain"]],"struct":[["SignerMiddleware","Middleware used for locally signing transactions, compatible with any implementer of the [`Signer`] trait."]]});

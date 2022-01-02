@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Component","Either"],["Item",""],["RawAbi","Contract ABI as a list of items where each item can be a function, constructor or event"]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["TypedTransaction","The TypedTransaction enum represents all Ethereum transaction types."]]});

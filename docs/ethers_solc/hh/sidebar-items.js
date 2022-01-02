@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["HardhatArtifact","A hardhat artifact"],["HardhatArtifacts","Hardhat style artifacts handler"]]});

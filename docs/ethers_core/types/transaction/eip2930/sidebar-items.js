@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AccessList","Access list"],["AccessListItem","Access list item"],["AccessListWithGasUsed",""],["Eip2930TransactionRequest","An EIP-2930 transaction is a legacy transaction including an [`AccessList`]."]]});

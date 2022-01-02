@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["NoopTracer","Tracer which does nothing."],["StdoutTracer","Tracer which prints to stdout."]],"trait":[["Tracer","Passed into execution context to collect metrics."]]});

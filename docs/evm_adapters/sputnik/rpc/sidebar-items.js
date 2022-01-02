@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ForkMemoryBackend","Memory backend with ability to fork another chain from an HTTP provider, storing all cache values in a `BTreeMap` in memory."]]});

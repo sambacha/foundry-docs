@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Transaction","Details of a signed transaction"],["TransactionReceipt","“Receipt” of an executed transaction: details of its execution."]]});

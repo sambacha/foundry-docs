@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Account",""],["LogRecord","LOG record."],["MockedHost",""],["Records",""],["SelfdestructRecord",""],["StorageValue",""]]});

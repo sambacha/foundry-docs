@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["interrupt","Interrupts."],["interrupt_data","Data attached to interrupts."],["resume_data","Data required for resume."]],"trait":[["Interrupt","Paused EVM with full state inside."]]});

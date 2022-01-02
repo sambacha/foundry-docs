@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["LogCallOrder","Ordering enum for calls and logs"],["Output","Function output type"]],"struct":[["CallTrace","Call trace of a tx"],["CallTraceArena","An arena of `CallTraceNode`s"],["CallTraceNode","A node in the arena"]]});

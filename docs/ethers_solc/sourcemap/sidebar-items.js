@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Jump",""]],"fn":[["parse","Parses a source map"]],"struct":[["Parser",""],["SourceElement","Represents a single element in the source map"],["SyntaxError","An error that can happen during source map parsing."]],"type":[["SourceMap","Represents a whole source map as list of `SourceElement`s"]]});

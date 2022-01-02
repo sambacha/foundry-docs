@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["EvmOdin","Wrapper around EVModin which implements the Evm trait"]],"trait":[["HostExt","Helper trait for exposing additional functionality over EVMOdin Hosts"]]});

@@ -1,7 +1,6 @@
 ---
 created: 2022-01-02T13:16:41 (UTC -08:00)
 tags: [rust,rustlang,rust-lang,Gasometer]
-source: file:///Users/sbacha/foundry/rustdocs/evm_gasometer/struct.Gasometer.html
 author: 
 ---
 

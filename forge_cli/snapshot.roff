@@ -1,0 +1,84 @@
+USAGE:
+    forge snapshot [FLAGS] [OPTIONS]
+
+FLAGS:
+        --asc               sort results by ascending gas used.
+        --desc              sort results by descending gas used.
+        --ffi               enables the FFI cheatcode
+        --force             force recompilation of the project, deletes the cache and artifacts folders
+        --hardhat           uses hardhat style project layout. This a convenience flag and is the same as `--contracts
+                            contracts --lib-paths node_modules`
+    -h, --help              Prints help information
+    -j, --json              print the test results in json format
+        --no-auto-detect    if set to true, skips auto-detecting solc and uses what is in the user's $PATH
+        --optimize          activate the solidity optimizer
+    -V, --version           Prints version information
+
+OPTIONS:
+        --allow-failure <allow-failure>
+            if set to true, the process will exit with an exit code = 0, even if the tests fail [env:
+            FORGE_ALLOW_FAILURE=]
+        --block-base-fee-per-gas <block-base-fee-per-gas>    the base fee in a block [default: 0]
+        --block-coinbase <block-coinbase>
+            the block.coinbase value during EVM execution [default: 0x0000000000000000000000000000000000000000]
+
+        --block-difficulty <block-difficulty>
+            the block.difficulty value during EVM execution [default: 0]
+
+        --block-gas-limit <block-gas-limit>                  the block.gaslimit value during EVM execution
+        --block-number <block-number>
+            the block.number value during EVM execution [env: DAPP_TEST_NUMBER=]  [default: 0]
+
+        --block-timestamp <block-timestamp>
+            the block.timestamp value during EVM execution [env: DAPP_TEST_TIMESTAMP=]  [default: 0]
+
+        --chain-id <chain-id>                                the chainid opcode value [default: 1]
+        --check <check>
+            Run snapshot in 'check' mode and compares against an existing snapshot file, [default: .gas-snapshot]. Exits
+            with 0 if snapshots match. Exits with 1 and prints a diff otherwise
+    -c, --contracts <contracts>
+            the directory relative to the root under which the smart contracts are [env: DAPP_SRC=]
+
+        --diff <diff>
+            Compare against a snapshot and display changes from the snapshot. Takes an optional snapshot file, [default:
+            .gas-snapshot]
+    -e, --evm-type <evm-type>
+            the EVM type you want to use (e.g. sputnik, evmodin) [default: sputnik]
+
+        --evm-version <evm-version>                          choose the evm version [default: london]
+        --fork-block-number <fork-block-number>
+            pins the block number for the state fork [env: DAPP_FORK_BLOCK=]
+
+    -f, --fork-url <fork-url>
+            fetch state over a remote instead of starting from empty state
+
+        --format <format>                                    How to format the output.
+        --gas-limit <gas-limit>                              the block gas limit [default: 18446744073709551615]
+        --gas-price <gas-price>                              the tx.gasprice value during EVM execution [default: 0]
+        --initial-balance <initial-balance>
+            the initial balance of each deployed test contract [default: 0xffffffffffffffffffffffff]
+
+        --lib-paths <lib-paths>...                           the paths where your libraries are installed
+        --libraries <libraries>...                           add linked libraries
+        --max <max>
+            Only include tests that used less gas that the given amount.
+
+        --min <min>
+            Only include tests that used more gas that the given amount.
+
+        --optimize-runs <optimize-runs>                      optimizer parameter runs [default: 200]
+    -o, --out <out-path>                                     path to where the contract artifacts are stored
+    -m, --match <pattern>                                    only run test methods matching regex [default: .*]
+    -r, --remappings <remappings>...                         the remappings
+        --remappings-env <remappings-env>                     [env: DAPP_REMAPPINGS=]
+        --root <root>
+            the project's root path. By default, this is the root directory of the current Git repository or the current
+            working directory if it is not part of a Git repository
+        --sender <sender>
+            the address which will be executing all tests [env: DAPP_TEST_ADDRESS=]  [default:
+            0x0000000000000000000000000000000000000000]
+        --snap <snap>                                        Output file for the snapshot. [default: .gas-snapshot]
+        --tx-origin <tx-origin>
+            the tx.origin value during EVM execution [default: 0x0000000000000000000000000000000000000000]
+
+        --verbosity <verbosity>                              verbosity of EVM output (0-3) [default: 0]

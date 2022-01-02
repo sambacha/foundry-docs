@@ -1,7 +1,6 @@
 ---
 created: 2022-01-02T13:03:30 (UTC -08:00)
 tags: [rust,rustlang,rust-lang,utils]
-source: file:///Users/sbacha/foundry/target/doc/forge/utils/index.html
 author: 
 ---
 

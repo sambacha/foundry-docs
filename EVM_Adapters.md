@@ -1,17 +1,15 @@
 ---
 created: 2022-01-02T13:24:59 (UTC -08:00)
 tags: [rust,rustlang,rust-lang,evm_adapters]
-source: file:///Users/sbacha/foundry/rustdocs/evm_adapters/index.html
 author: 
 ---
 
-# evm_adapters - Rust
+# evm_adapters
 
-> ## Excerpt
+>  Excerpt
 > evm-adapters
 
 ---
-Expand description
 
 Abstraction over various EVM implementations via the `Evm` trait. Currently supported: [Sputnik EVM](https://github.com/rust-blockchain/evm/) and [Evmodin](https://github.com/vorot93/evmodin).
 
